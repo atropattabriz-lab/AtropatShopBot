@@ -29,7 +29,8 @@ def load_products():
     df = pd.DataFrame()  # جلوگیری از UnboundLocalError
 
     try:
-        df = pd.read_excel("data/products.xlsx", engine="openpyxl")
+            df = pd.read_excel("data/products.xlsx", engine="openpyxl")
+        
         df = df.rename(columns={
             "Category": "category",
             "Product Name": "name",
