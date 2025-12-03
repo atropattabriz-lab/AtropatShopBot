@@ -24,6 +24,25 @@ PHONE_NUMBER = "09305069257"
 PRODUCT_FILE = "data/products.xlsx"
 
 def load_products():
+    import pandas as pd
+
+    df = pd.DataFrame()  # جلوگیری از UnboundLocalError
+
+    try:
+        df = pd.read_excel("data/products.xlsx", engine="openpyxl")
+        df = df.rename(columns={
+            "Category": "category",
+            "Product Name": "name",
+            "Price": "price",
+            "Stock": "stock",
+            "Description": "description"
+        })
+        df = df.fillna("")
+    except Exception as e:
+        print("Error loading products:", e)
+
+    return df
+    
     if not os.path.exists(PRODUCT_FILE):
         return pd.DataFrame()
         df = pd.read_excel(PRODUCT_FILE, engine="openpyxl")
