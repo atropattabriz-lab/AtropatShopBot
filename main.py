@@ -26,7 +26,8 @@ PRODUCT_FILE = "data/products.xlsx"
 def load_products():
     if not os.path.exists(PRODUCT_FILE):
         return pd.DataFrame()
-    df = pd.read_excel(PRODUCT_FILE)
+        df = pd.read_excel(PRODUCT_FILE, engine="openpyxl")
+        
     df = df.rename(columns={
         "product_id": "id",
         "product_name": "title",
